@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+int x[23];
+int n;
+bool check()
+{
+    int i=1,j=n;
+    while(i<j)
+    {
+        if(x[i]!=x[j])return 0;
+        i++;j--;
+    }
+    return 1;
+}
+void thu(int i)
+{
+    for(int j=0;j<=1;j++)
+    {
+        x[i]=j;
+        if(i==n)
+        {
+            if(check())
+            {
+                for(int k=1;k<=n;k++)
+                {
+                    cout<<x[k]<<" ";
+                }
+                cout<<endl;
+            }
+        }
+        else thu(i+1);
+    }
+}
+int main()
+{
+    cin>>n;
+    thu(1);
+    return 0;
+}
