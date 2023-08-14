@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int n,k;
+string a[1001];
+map<string,bool>dd;
+string s;
+int x[30];
+void thu(int i, int s, int numbers)
+{
+    for(int j=s;j<=numbers;j++)
+    {
+        x[i]=j;
+        if(i==k)
+        {
+           for(int v=1;v<=k;v++)
+           {
+               cout<<a[x[v]]<<" ";
+           }
+           cout<<endl;
+        }
+        else thu(i+1,j+1,numbers);
+    }
+}
+int main()
+{
+    int numbers=0;
+    cin>>n>>k;
+    for(int i=1;i<=n;i++)
+    {
+        cin>>s;
+        if(dd[s]==0)
+        {
+            dd[s]=1;
+            a[++numbers]=s;
+        }
+    }
+    sort(a+1,a+numbers+1);
+    thu(1,1,numbers);
+    // for(int i=1;i<=numbers;i++)
+    // cout<<a[i]<<" ";
+
+    return 0;
+}
