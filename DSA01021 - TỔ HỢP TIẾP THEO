@@ -1,0 +1,84 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+void solve(int n,int k, vector<int>& a)
+{
+    vector<bool>dd(n+1,0);
+    int ans=0;
+    for(int i=1;i<=k;i++)
+    {
+        dd[a[i]]=1;
+    }
+    a[k+1]=n+1;
+    int luu=0;
+    bool ok=0;
+    for(int i=k;i>=2;i--)
+    if(a[i]+1<a[i+1])
+    {
+       ok=1;
+       a[i]=a[i]+1;
+       luu=i;
+       break;
+    }
+    if(ok)
+    {
+        for(int i=1;i<=luu;i++)
+        if(dd[a[i]]==0)
+        {
+            ans++;
+        }
+        for(int i=luu+1;i<=k;i++)
+        if(dd[a[luu]+1]==0)
+        {
+            ans++;
+            a[luu]++;
+        }
+        
+    }
+    else 
+    {
+        if(a[1]<n-k+1)
+        {
+            //cout<<"1"<<endl;
+            a[1]++;
+            if(dd[a[1]]==0)ans++;
+            for(int i=2;i<=k;i++)
+            {
+                if(dd[a[1]+1]==0)ans++;
+                a[1]++;
+                
+            }
+            
+        }
+        else 
+        {
+            //cout<<"2"<<endl;
+            ans=k;
+        }
+    }
+    cout<<ans<<endl;
+
+}
+int test;
+int n,k;
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>k;
+        vector<int>a(n+1);
+        for(int i=1;i<=k;i++)
+        {
+            cin>>a[i];
+        }
+        solve(n,k,a);
+    }
+    return 0;
+}
