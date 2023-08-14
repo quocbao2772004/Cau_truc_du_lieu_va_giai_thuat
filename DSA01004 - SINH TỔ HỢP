@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,k;
+int x[20];
+bool dd[20];
+void thu(int i, int s, int k)
+{
+    for(int j=s;j<=n;j++)
+    if(!dd[j])
+    {
+        dd[j]=1;
+        x[i]=j;
+        if(i==k)
+        {
+            for(int v=1;v<=k;v++)
+            {
+                cout<<x[v];
+            }
+            cout<<" ";
+        }
+        else thu(i+1,j+1,k);
+        dd[j]=0;
+    }
+}
+
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>k;
+        thu(1,1,k);
+        cout<<endl;
+    }
+    return 0;
+}
