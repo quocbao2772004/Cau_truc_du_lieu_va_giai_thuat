@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,k;
+int x[1005];
+bool dd[1005],check[1005];
+int a[1005];
+void thu(int i, int s, int k,int n)
+{
+    for(int j=s;j<=n;j++)
+    if(!dd[j])
+    {
+        dd[j]=1;
+        x[i]=j;
+        if(i==k)
+        {
+            for(int v=1;v<=k;v++)
+            {
+                cout<<a[x[v]]<<" ";
+            }
+            cout<<endl;
+        }
+        else thu(i+1,j+1,k,n);
+        dd[j]=0;
+    }
+}
+int indexx=0;
+int main()
+{
+    
+    cin>>n>>k;
+    for(int i=1;i<=n;i++)
+    {
+        int x;
+        cin>>x;
+        if(!check[x])
+        {
+            check[x]=1;
+            a[++indexx]=x;
+        }
+    }
+    sort(a+1,a+indexx+1);
+    thu(1,1,k,indexx);
+    cout<<endl;
+  
+    return 0;
+}
