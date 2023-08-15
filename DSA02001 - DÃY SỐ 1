@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+long long n,a[2000];
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        deque<int>q;
+        cin>>n;
+        for(int i=1;i<=n;i++)
+        {
+            cin>>a[i];
+            q.push_back(a[i]);
+        }
+        cout<<"[";
+        for(int i=1;i<=n-1;i++)
+        {
+            cout<<a[i]<<" ";
+        }
+        cout<<a[n]<<"]"<<endl;
+        int m=n-1;
+        int d=0;
+        while(1&&m>=1)
+        {
+            cout<<"[";
+            for(int i=1;i<=m;i++)
+            {
+                int n1=q.front();
+                q.pop_front();
+                int n2=q.front();
+                cout<<n1+n2;
+                if(i!=m)cout<<" ";
+                else q.pop_front();
+                q.push_back(n1+n2);
+            }
+            cout<<"]"<<endl;
+            m--;
+            if(q.size()<=1)break;
+        }
+
+    }
+  
+    return 0;
+}
