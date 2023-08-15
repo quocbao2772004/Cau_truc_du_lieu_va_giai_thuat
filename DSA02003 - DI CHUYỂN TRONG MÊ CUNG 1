@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,a[100][100];
+int dx[2]={0,1};
+int dy[2]={1,0};
+bool check[101][101];
+
+char x[1001];
+
+void print(int numbers,char x[])
+{
+    for(int i=1;i<=numbers;i++)
+    {
+        cout<<x[i];
+    }
+    cout<<" ";
+}
+void solve(int x_current,int y_current,int numbers,bool &ok)
+{
+    for(int i=0;i<=1;i++)
+    {
+        int x_after=x_current+dx[i];
+        int y_after=y_current+dy[i];
+        if(x_after==n && y_after==n)
+        {
+            ok=1;
+            if(i==0)x[numbers]='D';
+            else x[numbers]='R';
+            print(numbers,x);
+        }
+        else if(!check[y_after][x_after] && x_after<=n && y_after<=n && a[y_after][x_after]==1)
+        {
+            if(i==0)x[numbers]='D';
+            else x[numbers]='R';
+            check[y_after][x_after]=1;
+            solve(x_after,y_after,numbers+1,ok);
+            check[y_after][x_after]=0;
+        }
+    }
+}
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        bool ok=0;
+        cin>>n;
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                check[i][j]=0;
+                cin>>a[i][j];
+            }
+        }
+        if(a[1][1]==0)
+        {
+            cout<<-1<<endl;
+            continue;
+        }
+        check[1][1]=1;
+        solve(1,1,1,ok);
+        if(ok==0)cout<<-1;
+        cout<<endl;
+    }
+  
+    return 0;
+}
