@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+#define l length()
+#define f(i,a,b) for(int i=a;i<=b;i++)
+#define f1(i,a,b) for(int i=a;i>=b;i--)
+#define f2(i,a,b,k) for(int i=a;i<=b;i+=k)
+#define fi freopen("Document.in","r",stdin)
+#define fo freopen("PTIT.out","w",stdout)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+using namespace std;
+
+void goi()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    //fi;fo;
+
+}
+const ll mod=1e9+7;
+ll test,n,k;
+ll solve(ll n, ll k)
+{
+    if(k==1)return n;
+    ll x=solve(n,k/2);
+    if(k%2==0)return ((x%mod)*(x%mod))%mod;
+    else return (((x%mod)*(x%mod)%mod)%mod*(n%mod))%mod;
+}
+int main()
+{
+    goi();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>k;
+        cout<<solve(n,k)<<endl;
+    }
+    return 0;
+}
+
