@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+#define l length()
+#define f(i,a,b) for(int i=a;i<=b;i++)
+#define f1(i,a,b) for(int i=a;i>=b;i--)
+#define f2(i,a,b,k) for(int i=a;i<=b;i+=k)
+#define fi freopen("Document.in","r",stdin)
+#define fo freopen("PTIT.out","w",stdout)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+using namespace std;
+
+void goi()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    //fi;fo;
+
+}
+int x[1001];
+void solve(int k,int x[])
+{
+    for(int i=1;i<=k;i++)
+    {
+        cout<<char(x[i]+65);
+    }
+    cout<<endl;
+}
+void thu(int i,int s, int n,int k)
+{
+    f(j,s,n)
+    {
+        x[i]=j;
+        if(i==k)
+        {
+            solve(k,x);
+        }
+        else thu(i+1,j,n,k);
+    }
+}
+char c;
+int n;
+int main()
+{
+    cin>>c>>n;
+    thu(1,0,c-'A',n);
+    return 0;
+}
