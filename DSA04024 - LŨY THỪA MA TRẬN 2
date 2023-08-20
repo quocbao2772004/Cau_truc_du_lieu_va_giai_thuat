@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define f(i,a,b) for(int i=a;i<=b;i++)
+#define vll vector<long long>
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+typedef vector<vector<ll>> Matrix;
+const ll mod=1e9+7;
+ll test, k, n;
+
+Matrix multiply(const Matrix& a,const Matrix& b)
+{
+    Matrix c(n+1,vll(n+1,0));
+    f(i,1,n)
+    {
+        f(j,1,n)
+        {
+            f(k,1,n)
+            {
+                c[i][j] = ((c[i][j] % mod) + (((a[i][k] % mod) * (b[k][j] % mod)) % mod) % mod) % mod;
+            }
+        }
+    }
+    return c;
+}
+Matrix power(const Matrix& a, ll n)
+{
+    if(n==1)return a;
+    if(n%2==0)
+    {
+        Matrix temp=power(a,n/2);
+        return multiply(temp,temp);
+    }
+    else 
+    {
+        Matrix temp=power(a,n/2);
+        return multiply(a, multiply(temp,temp) );
+    }
+
+}
+void display(const Matrix& a)
+{
+    ll sum=0;
+    f(i,1,n)
+    {
+        sum=((sum%mod)+(a[i][n]%mod))%mod;
+    }
+    cout<<sum<<endl;
+}
+int main()
+{
+    faster();
+    cin >> test;
+    while (test--)
+    {
+        cin>>n>>k;
+        Matrix a(n+1,vll(n+1));
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                cin>>a[i][j];
+            }
+        }
+        display(power(a,k));
+    }
+    return 0;
+}
