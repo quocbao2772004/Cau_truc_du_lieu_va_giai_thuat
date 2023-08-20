@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define f(i,a,b) for(int i=a;i<=b;i++)
+#define vll vector<long long>
+#define  Matrix vector<vector<ll>> 
+
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+const ll mod=1e9+7;
+ll power(ll a, ll b)
+{
+    if(b==0)return 1;
+    ll temp=power(a,b/2)%mod;
+    if(b%2==0) return (temp*temp)%mod;
+    else return a*((temp*temp)%mod)%mod;
+}
+ll a,b;
+int main()
+{
+    faster();
+    while(cin>>a>>b)
+    {
+        if(a==0&&b==0)return 0;
+        cout<<power(a,b)<<endl;
+    }
+    return 0;
+}
