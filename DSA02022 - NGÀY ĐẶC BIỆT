@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define vll vector<long long>
+#define Matrix vector<vector<ll>>
+#define pb push_back
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+const ll mod = 1e9 + 7;
+//   22/02/2022
+//   20/02/2002
+//        /2022
+vector<string> numbers, years;
+void solve( vector<string>&numbers, vector<string> &years)
+{
+    for (int k = 2; k <= 3; k++)
+    {
+        for (int j = 0; j <= 3; j++)
+        {
+            years.pb(numbers[k] + numbers[j]);
+        }
+    }
+    for(int i=1;i<=3;i++)
+    {
+        for(auto v:years)
+        {
+            cout<<numbers[i]<<"/02/"<<v<<endl;
+        }
+    }
+}
+
+int main()
+{
+    faster();
+    numbers.pb("00");
+    numbers.pb("02");
+    numbers.pb("20");
+    numbers.pb("22");
+    solve(numbers,years);
+    return 0;
+}
