@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+#define l length()
+#define f(i,a,b) for(int i=a;i<=b;i++)
+#define f1(i,a,b) for(int i=a;i>=b;i--)
+#define f2(i,a,b,k) for(int i=a;i<=b;i+=k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+using namespace std;
+const ll mod=1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test,n;
+
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        vll a(n);
+        for(int i=0;i<=n-1;i++)cin>>a[i];
+        sort(a.begin(),a.end());
+        ll sum=0;
+        for(auto i=0;i<=n-1;i++)
+        {
+            sum=(sum%mod+(((a[i]%mod)*(i%mod))%mod )%mod)%mod;
+        }
+        cout<<sum<<endl;
+    }
+    return 0;
+}
