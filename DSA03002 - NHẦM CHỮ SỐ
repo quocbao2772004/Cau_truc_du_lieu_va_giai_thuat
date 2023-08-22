@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+#define l length()
+#define f(i,a,b) for(int i=a;i<=b;i++)
+#define f1(i,a,b) for(int i=a;i>=b;i--)
+#define f2(i,a,b,k) for(int i=a;i<=b;i+=k)
+#define fi freopen("Document.in","r",stdin)
+#define fo freopen("PTIT.out","w",stdout)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+using namespace std;
+
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+string chuyen(string a,char n,char m)
+{
+    f(i,0,a.length()-1)
+    {
+        if(a[i]==n)a[i]=m;
+    }
+    return a;
+}
+long long convertSN(string a)
+{
+    long long s=0;
+    stringstream ss;ss<<a;ss>>s;ss.clear();
+    return s;
+}
+long long sum_max(string a,string b)
+{
+    a=chuyen(a,'5','6');
+    b=chuyen(b,'5','6');
+    return convertSN(a)+convertSN(b);
+}
+long long sum_min(string a,string b)
+{
+    a=chuyen(a,'6','5');
+    b=chuyen(b,'6','5');
+    return convertSN(a)+convertSN(b);
+}
+string a,b;
+int main()
+{
+    faster();
+    cin>>a>>b;
+    cout<<sum_min(a,b)<<" "<<sum_max(a,b);
+    return 0;
+}
