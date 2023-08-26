@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+#define l length()
+#define f(i,a,b) for(int i=a;i<=b;i++)
+#define f1(i,a,b) for(int i=a;i>=b;i--)
+#define f2(i,a,b,k) for(int i=a;i<=b;i+=k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+using namespace std;
+const ll mod=1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+
+int n;
+int main()
+{
+    faster();
+    cin>>n;
+    vi a(n);
+    for(auto &i : a)cin>>i;
+    sort(a.begin(),a.end());
+    int m=max(a[n-3]*a[n-2]*a[n-1],a[n-2]*a[n-1]);
+    m=max(m,a[0]*a[1]);
+    m=max(m,a[0]*a[1]*a[2]);
+    m=max(m,a[0]*a[1]*a[n-1]);
+
+    cout<<m;
+    return 0;
+}
