@@ -25,6 +25,12 @@ struct edge
 {
     int u,v;
     int w;
+    edge (int u,int v,int w)
+    {
+        this->u=u;
+        this->v=v;
+        this->w=w;
+    }
 };
 const int N=1005;
 int test,n,m;
@@ -60,8 +66,7 @@ void inp()
     for(int i=1;i<=m;i++)
     {
         cin>>x>>y>>w;
-        edge e;
-        e.u=x;e.v=y;e.w=w;
+        edge e=edge(x,y,w);
         canh.push_back(e);
     }
 }
