@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,x;
+vector<tuple<int,int,int>>vp;
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>x;
+        vi a(n);
+        for(int i=1;i<=n;i++)
+        {
+            cin>>a[i];
+            vp.push_back({abs(x-a[i]),i,a[i]});
+        }
+        sort(vp.begin(),vp.end());
+        for(auto i:vp)
+        {
+            cout<<get<2>(i)<<" ";
+        }
+        vp.clear();
+        cout<<endl;
+    }
+    return 0;
+}
