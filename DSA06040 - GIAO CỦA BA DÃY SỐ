@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int n,k,m;
+int test;
+
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>m>>k;
+        vll a(n),b(m),c(k);
+        for(auto &i:a)cin>>i;
+        for(auto &i:b)cin>>i;
+        for(auto &i:c)cin>>i;
+        int x=0,y=0,z=0;
+        bool ok=0;
+        while(x<n&&y<m&&z<k)
+        {
+            if(a[x]==b[y] && b[y]==c[z])
+            {
+                cout<<a[x]<<" ";
+                ok=1;
+                x++;y++;z++;
+            }
+            else if(a[x]<b[y])x++;
+            else if(b[y]<c[z])y++;
+            else z++;
+        }
+        if(!ok)cout<<"-1";
+        cout<<endl;
+
+        
+    }
+
+    
+    return 0;
+}
