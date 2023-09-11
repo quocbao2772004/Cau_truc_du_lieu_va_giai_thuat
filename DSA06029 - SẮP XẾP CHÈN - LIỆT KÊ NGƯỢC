@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int n;
+void display(vi&a,int n)
+{
+    for(auto i=0;i<n;i++)
+    {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+}
+int main()
+{
+    faster();
+    cin>>n;
+    vi a(n);
+    for(auto &i:a)cin>>i;
+    vi g[n];
+    g[0].push_back(a[0]);
+    f(i,1,n-1)
+    {
+        int luu=a[i];
+        int j=i-1;
+        while(j>=0 && a[j]>luu)
+        {
+            a[j+1]=a[j];
+            j--;
+        }
+        a[j+1]=luu;
+        
+        //display(a,i+1);
+        f(k,0,i)
+        {
+            g[i].push_back(a[k]);
+        }
+    }
+    f1(i,n-1,0)
+    {
+        cout<<"Buoc "<<i<<": ";
+        for(auto k:g[i])
+        {
+            cout<<k<<" ";
+        }
+        cout<<endl;
+    }
+    
+    return 0;
+}
