@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int n,k,m;
+int test;
+
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        vi a(n+1),t(n+1,0),t1(n+1,0);
+        f(i,1,n)
+        {
+            cin>>a[i];
+            t[i]=t[i-1]+a[i];
+        }
+        t1[n]=a[n];
+        f1(j,n-1,1)
+        {
+            t1[j]=t1[j+1]+a[j];
+        }
+        // f1(j,n,1)
+        // {
+        //     cout<<t1[j]<<" ";
+        // }
+        // cout<<endl;
+        bool ok=0;
+        f(i,2,n-1)
+        {
+            if(t[i-1]==t1[i+1])
+            {
+                ok=1;
+                cout<<i<<endl;
+            }
+            //cout<<t[i]<<" "<<t1[i+1]<<endl;
+        }
+        if(!ok)cout<<"-1"<<endl;
+
+        
+        
+    }
+
+    
+    return 0;
+}
