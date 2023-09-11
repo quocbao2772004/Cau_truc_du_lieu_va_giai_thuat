@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+
+int test,x,n,m,k;
+vector<pair<int,int>>vp;
+bool cmp(pair<int,int>&a, pair<int,int>&b)
+{
+    if(a.second==b.second)return a.first<b.first;
+    return a.second>b.second;
+}
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        vi a(n);
+        map<int,int>d;
+        for(auto &i:a)
+        {
+            cin>>i;
+            d[i]++;
+        }
+        for(auto i:d)
+        {
+            vp.push_back({i.first,i.second});
+        }
+        sort(vp.begin(),vp.end(),cmp);
+        for(auto i:vp)
+        {
+            for(int j=1;j<=i.second;j++)
+            {
+                cout<<i.first<<" ";
+            }
+        }
+        vp.clear();
+        cout<<endl;
+    }
+    return 0;
+}
