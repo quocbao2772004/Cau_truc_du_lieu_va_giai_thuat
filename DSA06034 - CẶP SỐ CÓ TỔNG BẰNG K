@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+
+int test,x,n,m,k;
+
+int main()
+{
+    faster();
+    
+    cin>>test;
+    while(test--)
+    {
+       cin>>n>>k;
+       vll a(n);
+       map<ll,ll>d;
+       for(auto &i:a)
+       {
+        cin>>i;
+        d[i]++;
+       }
+       ll res=0;
+       for(auto i:a)
+       {
+          if(d[i]>0&&d[k-i]>0)
+          {
+            if(k-i==i)
+            {
+                res+=(d[i]*(d[i]-1))/2;
+                d[i]=0;
+            }
+            else 
+            {
+                res+=d[i]*d[k-i];
+                d[i]=0;
+                d[k-i]=0;
+            }
+      
+          }
+       }
+       cout<<res<<endl;
+       
+        
+    }
+    return 0;
+}
