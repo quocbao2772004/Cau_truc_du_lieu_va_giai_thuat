@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int n;
+int test;
+ll tknp(int l,int r, vll &a, ll k)
+{
+    while(l<=r)
+    {
+        int m=(l+r)/2;
+        if(a[m]==k)return m;
+        if(a[m]<k)l=m+1;
+        else r=m-1;
+    }
+    return -1;
+}
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        vll a(n);
+        for(auto &i:a)
+        {
+            cin>>i;  
+        }
+        sort(all(a));
+        bool ok=0;
+        f(i,0,n-3)
+        {
+            if(ok)break;
+            f(j,i+1,n-2)
+            {
+                ll x=sqrt(a[i]*a[i]+a[j]*a[j]);
+                if(x*x!=a[i]*a[i]+a[j]*a[j])continue;
+                if(tknp(j+1,n-1,a,x)!=-1)
+                {
+                    ok=1;break;
+                }
+            }
+        }
+        if(ok)cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
+    return 0;
+}
