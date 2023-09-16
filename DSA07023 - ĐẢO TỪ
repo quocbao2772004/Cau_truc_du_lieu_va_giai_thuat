@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+bool check(char s)
+{
+    if(s=='*'||s=='-'||s=='+'||s=='/')return true;
+    return false;
+}
+int test;
+string s;
+int main()
+{
+    
+    faster();
+    cin>>test;
+    cin.ignore();
+    while(test--)
+    {
+        getline(cin,s);
+        stack<string>st;
+        stringstream ss(s);
+        string token="";
+        while(ss>>token)
+        {
+            st.push(token);
+        }
+        while(!st.empty())
+        {
+            cout<<st.top()<<" ";
+            st.pop();
+        }
+        cout<<endl;
+    }
+    return 0;
+}
