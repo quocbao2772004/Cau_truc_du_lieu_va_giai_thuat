@@ -1,0 +1,84 @@
+#include <bits/stdc++.h>
+
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+bool check(char s)
+{
+    if(s=='*'||s=='-'||s=='+'||s=='/')return true;
+    return false;
+}
+int test;
+string s;
+//1 Trả về kích thước của queue
+//2 Kiểm tra xem queue có rỗng không, nếu có in ra “YES”, nếu không in ra “NO”.
+//3 Cho một số nguyên và đẩy số nguyên này vào cuối queue.
+//4 Loại bỏ phần tử ở đầu queue nếu queue không rỗng, nếu rỗng không cần thực hiện.
+//5 Trả về phần tử ở đầu queue, nếu queue rỗng in ra -1.
+//6 Trả về phần tử ở cuối queue, nếu queue rỗng in ra -1.
+int main()
+{
+    
+    faster();
+    cin>>test;
+    cin.ignore();
+    while(test--)
+    {
+        int n,m,k;
+        cin>>n;
+        deque<int>q;
+        while(n--)
+        {
+            cin>>m;
+            if(m==1)
+            {
+                cout<<q.size()<<endl;
+            }
+            else if(m==2)
+            {
+                if(!q.empty())cout<<"NO"<<endl;
+                else cout<<"YES"<<endl;
+            }
+            else if(m==3)
+            {
+                cin>>k;
+                q.push_back(k);
+            }
+            else if(m==4)
+            {
+                if(!q.empty())q.pop_front();
+                
+            }
+            else if(m==5)
+            {
+                if(!q.empty())cout<<q.front()<<endl;
+                else cout<<-1<<endl;
+            }
+            else
+            {
+                if(!q.empty())cout<<q.back()<<endl;
+                else cout<<-1<<endl;
+            }
+
+        }
+    }
+    return 0;
+}
