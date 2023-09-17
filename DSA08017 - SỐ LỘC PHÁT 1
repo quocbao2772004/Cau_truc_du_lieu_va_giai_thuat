@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+
+#define f(i, a, b) for (int i = a; i <= b; i++)
+#define f1(i, a, b) for (int i = a; i >= b; i--)
+#define f2(i, a, b, k) for (int i = a; i <= b; i += k)
+#define ll long long
+#define pb push_back
+#define ft first
+#define sd second
+#define vll vector<ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define all(x) x.begin(), x.end()
+#define pii pair<int, int>
+using namespace std;
+const ll mod = 1e9+7;
+typedef vector<vll> Matrix;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+bool check(char s)
+{
+    if(s=='*'||s=='-'||s=='+'||s=='/')return true;
+    return false;
+}
+int test;int n;
+
+int main()
+{
+    
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        vector<string> v;
+        v.pb("6");
+        v.pb("8");
+        ll t=1,b=0;
+        while(t<n)
+        {
+            int m=v.size()-1;
+            f(i,b,m)
+            {
+                v.pb("6"+v[i]);
+            }
+            f(i,b,m)
+            {
+                v.pb("8"+v[i]);
+            }
+            b=m+1;
+            t++;
+        }
+        //sort(all(v),greater<string>());
+        for(int i=v.size()-1;i>=0;i--)cout<<v[i]<<" ";
+        cout<<endl;
+    }
+    return 0;
+}
