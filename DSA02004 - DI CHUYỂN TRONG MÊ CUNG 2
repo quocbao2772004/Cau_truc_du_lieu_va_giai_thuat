@@ -1,0 +1,106 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n;
+// DRLU
+int dx[4]={1,0,0,-1};
+int dy[4]={0,1,-1,0};
+bool visited[101][101];
+vector<char>res;
+vector<string>ans;
+bool ok;
+void thu(int x,int y, vector<vector<int>>a)
+{
+    if(x==n&&y==n)
+    {
+        ok=1;
+        string s="";
+        for(auto i:res)
+        {
+            s=s+string(1,i);
+        }
+        ans.push_back(s);
+    }
+    for(int i=0;i<=3;i++)
+    {
+        int x1=x+dx[i];
+        int y1=y+dy[i];
+        if(!visited[x1][y1]&&x1<=n&&y1<=n&&x1>=1&&y1>=1 && a[x1][y1]==1)
+        {
+            switch (i)
+            {
+                case 0:
+                {
+                    res.push_back('D');
+                }break;
+                case 1:
+                {
+                    res.push_back('R');
+                }
+                break;
+                case 2:
+                {
+                    res.push_back('L');
+                }break;
+                case 3:
+                {
+                    res.push_back('U');
+                }break;
+            }
+            
+            visited[x1][y1]=1;
+            thu(x1,y1,a);
+            visited[x1][y1]=0;
+            res.pop_back();
+         
+            
+        }
+    }
+}
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        vector<vector<int>>a(n+1,vector<int>(n+1));
+        memset(visited,0,sizeof(visited));
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                cin>>a[i][j];
+            }
+        }
+        if(a[1][1]==0||a[n][n]==0)
+        {
+            cout<<-1<<endl;
+            continue;
+        }
+        ok=0;
+        visited[1][1]=1;
+        thu(1,1,a);
+        if(!ok)cout<<-1;
+        else 
+        {
+            sort(ans.begin(),ans.end());
+            for(auto v:ans)
+            {
+                cout<<v<<" ";
+            }
+        }
+        cout<<endl;
+        res.clear();
+        ans.clear();
+
+    }
+    return 0;
+}
