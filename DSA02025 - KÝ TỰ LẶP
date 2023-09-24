@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int n;
+string s[11];
+int x[11];
+bool dd[11];
+int ans = 1e9;
+int f[11][11];
+int count(string a,string b)
+{
+    int dd1[26]={0};
+    int dem=0;
+    for(int i=0;i<=a.length()-1;i++)
+    {
+        dd1[a[i]-'A']++;
+    }
+    for(int i=0;i<=b.length()-1;i++)
+    {
+        dd1[b[i]-'A']++;
+    }
+    for(int i=0;i<=25;i++)
+    {
+        if(dd1[i]==2)dem++;
+    }
+    return dem;
+
+}
+int solve(int x[])
+{
+    int dem = 0;
+    for (int i = 1; i <= n - 1; i++)
+    {
+        dem+=f[x[i]][x[i+1]];
+    }
+    return dem;
+}
+void thu(int i)
+{
+    for (int j = 1; j <= n; j++)
+        if (!dd[j])
+        {
+            x[i] = j;
+            dd[j] = 1;
+            if (i == n)
+            {
+                ans=min(ans,solve(x));
+            }
+            else
+                thu(i + 1);
+            dd[j] = 0;
+        }
+}
+int main()
+{
+    faster();
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        cin >> s[i];
+    for(int i=1;i<=n-1;i++)
+    {
+        for(int j=i+1;j<=n;j++)
+        {
+            f[i][j]=count(s[i],s[j]);
+            f[j][i]=f[i][j];
+        }
+    }
+    thu(1);
+    cout << ans;
+
+    return 0;
+}
