@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int n,w;
+int a[10001],c[10001],x[10001];
+int ans=-1e9;
+vector<int>res;
+void thu(int i)
+{
+    for(int j=0;j<=1;j++)
+    {
+        x[i]=j;
+        if(i==n)
+        {
+            int sum=0,sum1=0;
+            for(int v=1;v<=n;v++)
+            {
+                sum+=(x[v]*a[v]);
+                sum1+=(x[v]*c[v]);
+            }
+            if(sum<=w)
+            {
+                if(ans<sum1)
+                {
+                    ans=sum1;
+                    res.clear();
+                    for(int v=1;v<=n;v++)
+                    {
+                        res.push_back(x[v]);
+                    }
+                }
+            }
+        }
+        else thu(i+1);
+    }
+}
+int main()
+{
+    faster();
+    //freopen("data.in","r",stdin);
+    cin>>n>>w;
+    for(int i=1;i<=n;i++)cin>>c[i];
+    for(int i=1;i<=n;i++)cin>>a[i];
+    thu(1);
+    cout<<ans<<endl;
+    for(auto i:res)
+    {
+        cout<<i<<" ";
+    }
+    
+    return 0;
+}
