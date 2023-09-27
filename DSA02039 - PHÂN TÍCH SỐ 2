@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,x[1001];
+vector<string>res;
+void thu(int i,int n,int t,int s)
+{
+    
+    for(int j=t;j>=1;j--)
+    if(s-j>=0)
+    {
+        x[i]=j;
+        if(s-j==0)
+        {
+            string s="(";
+            for(int v=1;v<=i;v++)
+            {
+                s=s+to_string(x[v]);
+                if(v!=i)s=s+" ";
+                else s=s+")";
+            }
+            res.push_back(s);
+        }
+        else thu(i+1,n,j,s-j);
+    }
+    
+}
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        thu(1,n,n,n);
+        cout<<res.size()<<endl;
+        for(auto i:res)
+        {
+            cout<<i<<" ";
+        }
+        cout<<endl;
+        res.clear();
+    }
+}
