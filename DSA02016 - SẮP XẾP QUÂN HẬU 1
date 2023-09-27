@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,x[1001];
+int d=0;
+int cot[1001],d1[1001],d2[1001];
+void thu(int i,int &d)
+{
+    for(int j=1;j<=n;j++)
+    if(!cot[j]&&!d1[i-j+n]&&!d2[i+j-1])// sắp xếp quân hậu thứ i nằm ở cột j và kiểm tra xem ở cột j đã có quân hậu nào quản lí theo đường chéo chưa
+    {
+        cot[j]=d1[i-j+n]=d2[i+j-1]=1;
+        x[i]=j;
+        if(i==n)
+        {
+            d++;
+        }
+        else thu(i+1,d);
+        cot[j]=d1[i-j+n]=d2[i+j-1]=0;
+    }
+}
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        memset(cot,0,sizeof(cot));
+        memset(d1,0,sizeof(d1));
+        memset(d2,0,sizeof(d2));
+        d=0;
+        thu(1,d);
+        cout<<d<<endl;
+    }
+}
