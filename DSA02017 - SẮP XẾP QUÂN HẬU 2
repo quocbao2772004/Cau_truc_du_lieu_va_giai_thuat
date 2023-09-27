@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,x[1001];
+int d=0;
+int cot[1001],d1[1001],d2[1001];
+void thu(int i,int n,int &d,vector<vector<int>>a)
+{
+    for(int j=1;j<=n;j++)
+    if(!cot[j]&&!d1[i-j+n]&&!d2[i+j-1])
+    {
+        cot[j]=d1[i-j+n]=d2[i+j-1]=1;
+        x[i]=j;
+        if(i==n)
+        {
+            int sum=0;
+            for(int v=1;v<=n;v++)
+            {
+                sum+=a[v][x[v]];
+                //cout<<v<<" "<<x[v]<<endl;
+            }
+            d=max(d,sum);
+            //cout<<sum<<endl;
+        }
+        else thu(i+1,n,d,a);
+        cot[j]=d1[i-j+n]=d2[i+j-1]=0;
+    }
+}
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        memset(cot,0,sizeof(cot));
+        memset(d1,0,sizeof(d1));
+        memset(d2,0,sizeof(d2));
+        int n=8;
+        vector<vector<int>>a(n+1,vector<int>(n+1));
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n;j++)cin>>a[i][j];
+        }
+        d=0;
+        thu(1,n,d,a);
+        cout<<d<<endl;
+    }
+}
