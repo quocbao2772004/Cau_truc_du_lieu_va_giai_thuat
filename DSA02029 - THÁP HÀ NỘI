@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int n;
+void thu(int n,char a, char b , char c)
+{
+    if(n==1)
+    {
+        cout<<a<<" -> "<<c<<endl;
+        return ;
+    }
+    thu(n-1,a,c,b);
+    thu(1,a,b,c);
+    thu(n-1,b,a,c);
+}
+int main()
+{
+    faster();
+    cin>>n;
+    thu(n,'A','B','C');
+
+}
