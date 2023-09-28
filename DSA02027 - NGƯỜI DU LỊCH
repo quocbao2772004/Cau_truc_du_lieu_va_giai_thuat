@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int n;
+int c[16][16];
+bool dd[16];
+int x[16];
+int mi=1e9;
+void thu(int i,int sum,int &mi)
+{
+    if(sum>mi)return ;
+    for(int j=2;j<=n;j++)
+    if(!dd[j])
+    {
+        dd[j]=1;
+        x[i]=j;
+        if(i==n-1)
+        {
+            mi=min(mi,sum+c[x[i-1]][x[i]]+c[x[n-1]][1]);
+            //cout<<sum<<endl;
+        }
+        else thu(i+1,sum+c[x[i-1]][j],mi);
+        dd[j]=0;
+    }
+}
+int main()
+{
+    faster();
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)cin>>c[i][j];
+    }
+    x[0]=1;
+    mi=1e9;
+    thu(1,0,mi);
+    cout<<mi;
+
+}
