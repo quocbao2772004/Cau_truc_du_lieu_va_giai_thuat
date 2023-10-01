@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test,n;
+vector<string>res;
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        res.push_back("0");
+        res.push_back("1");
+        int m=(1<<n);
+        while(res.size()<m)
+        {
+            int n1=res.size();
+            for(int i=n1-1;i>=0;i--)
+            res.push_back(res[i]);
+            for(int i=0;i<=n1-1;i++)
+            res[i]="0"+res[i];
+            for(int i=n1;i<=res.size()-1;i++)
+            res[i]="1"+res[i];
+        }
+        for(auto i:res)
+        {
+            cout<<i<<" ";
+        }
+        res.clear();
+        cout<<endl;
+    }
+    return 0;
+}
