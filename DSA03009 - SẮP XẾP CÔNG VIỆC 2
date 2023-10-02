@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test,n,m,k,s;
+bool cmp(pair<int,int>a, pair<int,int>b)
+{
+    return a.second>b.second;
+  
+}
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        
+       cin>>n;
+       int stt;
+       pair<int,int>x[n+1];
+       for(int i=1;i<=n;i++)cin>>stt>>x[i].first>>x[i].second;
+       sort(x+1,x+n+1,cmp);
+       bool check[1005]={0};
+       int cnt=0,ans=0;
+       for(int i=1;i<=n;i++)
+       {
+           while(check[x[i].first]&&x[i].first>0)x[i].first--;
+           if(!check[x[i].first]&&x[i].first>0)
+           {
+             cnt++;
+             check[x[i].first]=1;
+             ans+=x[i].second;
+           }
+       }
+       cout<<cnt<<" "<<ans<<endl;
+       
+    }
+    return 0;
+}
