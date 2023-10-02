@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test,n,m;
+int a[1005][1005],ans[1005][1005];
+int bfs()
+{
+    queue<pair<int,int>>q;
+    q.push({1,1});
+    ans[1][1]=0;
+    while(!q.empty())
+    {
+        int x=q.front().first;
+        int y=q.front().second;
+        q.pop();
+        if(x+a[x][y]<=n && !ans[x+a[x][y]][y])
+        {
+            ans[x+a[x][y]][y]=ans[x][y]+1;
+            if(x+a[x][y]==n&&y==m)return ans[x+a[x][y]][y];
+            q.push({x+a[x][y],y});
+        }
+        if(y+a[x][y]<=m && !ans[x][y+a[x][y]])
+        {
+            ans[x][y+a[x][y]]=ans[x][y]+1;
+            if(y+a[x][y]==m&&x==n)return ans[x][y+a[x][y]];
+            q.push({x,y+a[x][y]});
+        }
+    }
+    return -1;
+}
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+      
+       cin>>n>>m;
+       for(int i=1;i<=n;i++)
+       {
+          for(int j=1;j<=m;j++)
+          {
+            cin>>a[i][j];
+            ans[i][j]=0;
+          }
+       }
+       cout<<bfs()<<endl;
+    }
+    return 0;
+}
