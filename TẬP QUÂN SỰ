@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,k;
+int a[1005];
+void next()
+{
+    bool ok=0;
+    int i=k;
+    while(i>=1&&a[i]==n-k+i)i--;
+    if(i==0)ok=1;
+    else 
+    {
+        a[i]++;
+        for(int j=i+1;j<=k;j++)
+        {
+            a[j]=a[j-1]+1;
+        }
+    }
+}
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        bool dd[1005]={0};
+        int d=0;
+        cin>>n>>k;
+        for(int i=1;i<=k;i++)
+        {
+            cin>>a[i];
+            dd[a[i]]=1;
+        }
+        next();
+        for(int i=1;i<=k;i++)
+        {
+            if(dd[a[i]])d++;         
+        }
+        if(d==k)cout<<d<<endl;
+        else cout<<k-d<<endl;
+    }
+    
+  
+    return 0;
+}
