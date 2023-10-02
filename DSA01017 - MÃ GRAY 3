@@ -1,0 +1,31 @@
+// chuyển từ mã nhị phân sang gray bằng cách gray[0]=bin[0] và gray[i]=bin[i]+bin[i-1] chỉ lấy kết quả và bỏ qua số nhớ
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test,n;
+vector<string>res;
+string s;
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>s;
+        string gray="";
+        gray=string(1,s[0]);
+        for(int i=1;i<=s.length()-1;i++)
+        {
+            if(s[i]+s[i-1]-2*48==2)gray=gray+"0";
+            else gray=gray+string(1,char(s[i]+s[i-1]-48));
+        }
+        cout<<gray<<endl;
+    }
+    return 0;
+}
