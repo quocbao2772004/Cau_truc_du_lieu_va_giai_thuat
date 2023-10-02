@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test,n,m,k,s;
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+       cin>>n;
+       vector<long long>a(n),b(n);
+       for(auto &i:a)cin>>i;
+       for(auto &i:b)cin>>i;
+       sort(a.begin(),a.end());
+       sort(b.begin(),b.end(),greater<long long>());
+       long long t=0;
+       for(int i=0;i<n;i++)
+       {
+         t+=a[i]*b[i];
+       }
+       cout<<t<<endl;
+       
+    }
+    return 0;
+}
