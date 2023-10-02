@@ -1,0 +1,32 @@
+// mã bin sẽ được tạo ra từ mã gray bằng cách kí tự đầu tiên của bin = kí tự đầu tiên của gray và kí tự bin[i]=bin[i-1]^s[i]
+// phép xor sẽ bằng 1 khi 2 kí tự khác nhau và bằng 0 khi 2 kí tự giống nhau
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test,n;
+vector<string>res;
+string s;
+int main()
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>s;
+        string bin="";
+        bin=string(1,s[0]);
+        for(int i=1;i<=s.length()-1;i++)
+        {
+            if(bin[i-1]==s[i])bin=bin+"0";
+            else bin=bin+"1";
+        }
+        cout<<bin<<endl;
+    }
+    return 0;
+}
