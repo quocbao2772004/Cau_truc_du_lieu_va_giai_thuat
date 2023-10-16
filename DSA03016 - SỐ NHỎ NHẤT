@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void goi()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    // fi;fo;
+}
+
+int test;
+int n, k, m;
+int s, d;
+const int mod = 1e9 + 7;
+int main()
+{
+    goi();
+    cin >> test;
+    while (test--)
+    {
+        cin >> s >> d;
+        string res = "";
+        int s1 = s, d1 = d;
+        while (d > 0)
+        {
+            for (int i = 9; i >= 0; i--)
+            {
+                if (s - i > 0 && d > 1)
+                {
+                    res = to_string(i) + res;
+                    s -= i;
+                    break;
+                }
+                else if (s - i == 0 && d == 1)
+                {
+                    res = to_string(i) + res;
+                    s -= i;
+                    break;
+                }
+            }
+            d--;
+        }
+        if (res.size() == d1)
+        {
+            int sum = 0;
+            for (int i = 0; i <= res.size() - 1; i++)
+            {
+                sum += (res[i] - '0');
+            }
+            if (sum == s1)cout << res << endl;
+            else cout << -1 << endl;
+                
+        }
+        else cout << -1 << endl;
+            
+    }
+
+    return 0;
+}
