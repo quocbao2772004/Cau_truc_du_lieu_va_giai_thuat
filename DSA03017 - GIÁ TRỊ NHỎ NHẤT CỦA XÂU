@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void goi()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    // fi;fo;
+}
+
+int test;
+int n, k, m;
+string s;
+const int mod = 1e9 + 7;
+int main()
+{
+    goi();
+    cin >> test;
+    while (test--)
+    {
+        int dd[26]={0};
+        cin>>k>>s;
+        for(auto i:s)
+        {
+           dd[i-'A']++;
+        }
+        priority_queue<int,vector<int>>q;
+        for(int i=0;i<=25;i++)
+        {
+            q.push(dd[i]);
+        }
+        while(k>0)
+        {
+            int x=q.top();q.pop();
+            x-=1;
+            q.push(x);
+            k--;
+        }
+        int sum=0;
+        while(!q.empty())
+        {
+            sum=sum+(q.top())*(q.top());
+            q.pop();
+        }
+        cout<<sum<<endl;
+            
+    }
+
+    return 0;
+}
