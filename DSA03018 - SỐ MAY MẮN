@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void goi()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    // fi;fo;
+}
+
+int test;
+int n, k, m;
+string s;
+const int mod = 1e9 + 7;
+int main()
+{
+    goi();
+    cin >> test;
+    while (test--)
+    {
+        cin>>n;
+        int n7=n/7;
+        int n4=0;
+        while(n7>=0)
+        {
+            if((n-n7*7)%4==0)
+            {
+                n4=(n-n7*7)/4;
+                break;
+            }
+            n7--;
+        }
+        if(n7>=0)
+        {
+            while(n4--)cout<<4;
+            while(n7--)cout<<7;
+        }
+        else cout<<-1;
+        cout<<endl;
+            
+    }
+
+    return 0;
+}
