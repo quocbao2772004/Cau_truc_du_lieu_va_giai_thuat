@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+bool check(int x,vector<int>a)
+{
+    for(int i=0;i<=a.size()-1;i++)
+    if(a[i]/x==a[i]/(x+1))return 0;
+    return 1;
+}
+int n;
+int main()
+{
+    cin>>n;
+    vector<int>a(n);
+    for(auto &i:a)cin>>i;
+    int x=*min_element(a.begin(),a.end());
+    int res=0;
+    while(x>0)
+    {
+        if(check(x,a))
+        {
+            for(int i=0;i<=a.size()-1;i++)
+            {
+                res=res+(a[i]/(x+1))+1;
+            }
+            break;
+        }
+        x--;
+    }
+    cout<<res;
+    return 0;
+}
