@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+
+int n,test;
+long long a,b;
+string max_num(long long a,long long b)
+{
+    int n=9;
+    string s="";
+    while(a>0)
+    {
+        while(b>=n)
+        {
+            s=s+to_string(n);
+            b-=n;
+            a--;
+            if(a==0)break;
+        }
+        n--;
+    }
+    return s;
+}
+// 1089  4 18
+string min_num(long long a,long long b)
+{
+    int n=9;
+    string s="";
+    while(a>0)
+    {
+        while(b>=n && b>9)
+        {
+            s=to_string(n)+s;
+            b-=n;
+            a--;
+        }
+        if(a>1)
+        {
+            s=to_string(b-1)+s;
+            b-=n;
+            a--;
+            for(int i=1;i<a;i++)s='0'+s;
+            s='1'+s;
+            break;
+        }
+        else 
+        {
+            s=to_string(b)+s;a--;
+            break;
+        }
+    }
+    return s;
+}
+int main()
+{
+    cin>>a>>b;
+    if(a*9<b || (b==0 && a>1))
+    {
+        cout<<-1<<" "<<-1<<endl;
+        return 0;
+    }
+    cout<<min_num(a,b)<<" "<<max_num(a,b);
+    return 0;
+}
