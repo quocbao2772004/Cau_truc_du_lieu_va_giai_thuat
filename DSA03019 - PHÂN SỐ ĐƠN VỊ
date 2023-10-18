@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+
+int n,test;
+long long a,b;
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>a>>b;
+        while(1)
+        {
+            long long c=(b/a)+(b%a!=0);
+            cout<<"1/"<<c;
+            a=a*c-b;
+            b=b*c;
+            if(a==0){cout<<endl;break;}
+            else cout<<" + ";
+        }
+    }
+    
+    return 0;
+}
