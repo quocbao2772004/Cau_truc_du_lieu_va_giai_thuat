@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+#define endl '\n'
+#define ll long long
+using namespace std;
+int test;
+string s;
+ll n;
+string solve(vector<int>v)
+{
+    for(auto i:v)
+    {
+        string x=to_string(i);
+        int c=0;
+        for(int j=0;j<=s.length()-1;j++)
+        {
+            if(s[j]==x[c])
+            {
+                c++;
+            }
+        }
+        if(c==x.size())return x;
+    }
+    return "-1";
+}
+int main()
+{
+    cin>>test;
+    vector<int>v;
+    for(int i=1e2;i>=0;i--)
+    {
+        v.push_back(i*i*i);
+    }
+    while(test--)
+    {
+        cin>>s;
+        cout<<solve(v)<<endl;
+    }
+    return 0;
+}
