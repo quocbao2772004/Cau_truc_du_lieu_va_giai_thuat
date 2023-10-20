@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+int test;
+int n;
+int cal_sum(vector<int>&a,int left,int mid,int right)
+{
+    int left_sum=-1e9,right_sum=-1e9,sum=0;
+    for(int i=mid;i>=left;i--)
+    {
+        sum+=a[i];
+        if(sum>left_sum)
+        {
+            left_sum=sum;
+        }
+    }
+    sum=0;
+    for(int i=mid+1;i<=right;i++)
+    {
+        sum+=a[i];
+        if(sum>right_sum)
+        {
+            right_sum=sum;
+        }
+    }
+    return left_sum+right_sum;
+}
+int solve(vector<int>&a,int left,int right)
+{
+    if(left==right)return a[left];
+    int mid=(left+right)/2;
+    int left_sum=solve(a,left,mid);
+    int right_sum=solve(a,mid+1,right);
+    int cross_sum=cal_sum(a,left,mid,right);
+    return max(max(left_sum,right_sum),cross_sum);
+}
+int main() 
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        vector<int>a(n);
+        for(int i=0;i<n;i++)cin>>a[i];
+        cout<<solve(a,0,n-1)<<endl;
+    }
+    
+
+    return 0;
+}
