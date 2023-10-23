@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+ll n,k,m;
+vector<ll>v(100);
+int main() 
+{
+    faster();
+    v[1]=v[2]=1;
+    for(int i=3;i<=94;i++)
+    v[i]=v[i-1]+v[i-2];
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>k;
+        while(1)
+        {
+            if(n==1)
+            {
+                cout<<"0"<<endl;
+                break;
+            }
+            else if(n==2)
+            {
+                cout<<"1"<<endl;
+                break;
+            }
+            else if(k>v[n-2])
+            {
+                k-=v[n-2];
+                n--;
+            }
+            else n-=2;
+        }
+        
+        
+
+    }
+    
+
+    return 0;
+}
