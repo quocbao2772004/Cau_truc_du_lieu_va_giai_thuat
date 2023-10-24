@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,m,k;
+string x,y,z;
+
+int main() 
+{
+    faster();
+   
+    cin>>test;
+    while(test--)
+    {        
+        cin>>n>>m>>k;
+        cin>>x>>y>>z;
+        int dp[n+5][m+5][k+5];
+        memset(dp,0,sizeof(dp));
+        for(int i=1;i<=x.size();i++)
+        {
+            for(int j=1;j<=y.size();j++)
+            {
+                for(int v=1;v<=z.size();v++)
+                {
+                    if(x[i-1]==y[j-1] && x[i-1]==z[v-1])
+                    {
+                        dp[i][j][v]=dp[i-1][j-1][v-1]+1;
+                    }
+                    else dp[i][j][v]=max(max(dp[i-1][j][v],dp[i][j-1][v]),dp[i][j][v-1]);
+                }
+            }
+        }
+        cout<<dp[n][m][k]<<endl;
+    }
+    
+
+    return 0;
+}
