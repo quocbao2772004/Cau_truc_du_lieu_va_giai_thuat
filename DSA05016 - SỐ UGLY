@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,m,k,s;
+string x,y,z;
+long long f[10005];
+// Số Ugly là các số chỉ có ước số là 2, 3, 5. Theo qui ước số 1 cũng là 1 số Ugly. 
+// Dưới đây là 11 số Ugly đầu tiên: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15. 
+// Cho số tự nhiên N, nhiệm vụ của bạn là tìm số Ugly thứ N.
+int main() 
+{
+    faster();
+    f[1]=1;int i2,i3,i5;
+    i2=i3=i5=1;
+    for(int i=2;i<=1e4;i++)
+    {
+        f[i]=min(f[i2]*2,min(f[i3]*3,f[i5]*5));
+        if(f[i]==f[i2]*2)i2++;
+        if(f[i]==f[i3]*3)i3++;
+        if(f[i]==f[i5]*5)i5++;
+    }
+    cin>>test;
+    while(test--)
+    {        
+        cin>>n;
+        cout<<f[n]<<endl;
+    }
+     
+
+    return 0;
+}
