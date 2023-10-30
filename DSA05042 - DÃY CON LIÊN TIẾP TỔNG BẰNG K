@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+
+long long test,n,k,m;
+
+int main() 
+{
+    faster();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>k;
+        vector<int>a(n+1);
+        for(int i=1;i<=n;i++)cin>>a[i];
+        map<long long,bool>mp;
+        long long sum=0;bool ok=0;
+        for(int i=1;i<=n;i++)
+        {
+            sum+=a[i];
+            if(sum==k||mp[sum-k])
+            {
+                ok=1;break;
+            }
+            mp[sum]=1;
+        }
+        if(ok)cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
+    
+    
+    return 0;
+}
