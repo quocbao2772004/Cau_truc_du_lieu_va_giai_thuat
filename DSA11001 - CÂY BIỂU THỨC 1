@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int test;
+int n;
+string s;
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>s;
+        stack<string>st;
+        for(int i=0;i<=s.length()-1;i++)
+        {
+            if(s[i]!='+' && s[i]!='-' && s[i]!='*' && s[i]!='/')
+            {
+                st.push(string(1,s[i]));
+            }
+            else 
+            {
+                string a=st.top();st.pop();
+                string b=st.top();st.pop();
+                st.push(b+""+s[i]+""+a);
+            }
+        }
+        cout<<st.top()<<endl;
+
+    }
+    return 0;
+}
