@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+int test;
+int n;
+string s[10001];
+int parent_node, child_node;
+char x;
+struct node
+{
+    int data;
+    node *left,*right;
+};
+node *create_node(int data)
+{
+    node *temp=new node;
+    temp->data=data;
+    temp->left=temp->right=NULL;
+    return temp;
+}
+void build_tree(node *temp,char x, int parent_node, int child_node)
+{
+    if(temp!=NULL)
+    {
+        if(temp->data==parent_node)
+        {
+            if(x=='L')temp->left=create_node(child_node);
+            else temp->right=create_node(child_node);
+        }
+        else 
+        {
+            build_tree(temp->left,x,parent_node,child_node);
+            build_tree(temp->right,x,parent_node,child_node);
+        }
+        
+    }
+}
+int count_leaf(node *temp)
+{
+    if(temp==NULL)return 0;
+    if(temp->left==NULL && temp->right==NULL)
+    return 1;
+    return count_leaf(temp->left)+count_leaf(temp->right);
+}
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        cin>>parent_node>>child_node>>x;
+        node *temp=create_node(parent_node);
+        build_tree(temp,x,parent_node,child_node);
+        for(int i=2;i<=n;i++)
+        {
+            cin>>parent_node>>child_node>>x;
+            build_tree(temp,x,parent_node,child_node);
+        }
+        if(count_leaf(temp->left)==count_leaf(temp->right))cout<<1;
+        else cout<<0;
+        cout<<endl;
+  
+    }
+    
+    return 0;
+}
