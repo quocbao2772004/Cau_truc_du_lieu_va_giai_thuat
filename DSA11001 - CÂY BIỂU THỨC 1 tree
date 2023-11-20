@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+int test;
+int n;
+string s;
+struct node
+{
+    char data;
+    node *left,*right;
+};
+node *create_node(char c)
+{
+    node *temp=new node;
+    temp->data=c;
+    temp->left=temp->right=nullptr;
+    return temp;
+}
+void order(node *a)
+{
+    if(a!=NULL)
+    {
+        order(a->left);
+        cout<<a->data;
+        order(a->right);
+    }
+}
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>s;
+        stack<node*>st;
+        for(int i=0;i<=s.length()-1;i++)
+        {
+            if(s[i]=='+'||s[i]=='-'||s[i]=='*'||s[i]=='/')
+            {
+                node *temp=create_node(s[i]);
+                temp->right=st.top();st.pop();
+                temp->left=st.top();st.pop();
+                st.push(temp);
+            }
+            else st.push(create_node(s[i]));
+        }
+        order(st.top());
+        cout<<endl;
+    }
+    
+    return 0;
+}
