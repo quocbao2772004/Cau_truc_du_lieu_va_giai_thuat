@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+int test;
+int n;
+string s[10001];
+struct node 
+{
+    string data;
+    node *left,*right;
+};
+node *create_node(string c)
+{
+     node *temp=new node;
+     temp->data=c;
+     temp->left=temp->right=NULL;
+     return temp;
+}
+node* create_tree(node*temp, int i,int n)
+{
+    if(i<n)
+    {
+        temp=create_node(s[i]);
+        temp->left=create_tree(temp->left,2*i+1,n);
+        temp->right=create_tree(temp->right,2*i+2,n);
+    }
+    return temp;
+}
+long long calc(node *temp)
+{
+    if(temp->data!="+" && temp->data != "-" && temp->data != "*" && temp->data !="/")
+    return stoll(temp->data);
+    if(temp->data=="+")
+    return calc(temp->left)+calc(temp->right);
+    else if(temp->data=="-")
+    return calc(temp->left)-calc(temp->right);
+    else if(temp->data=="*")
+    return calc(temp->left)*calc(temp->right);
+    else return calc(temp->left)/calc(temp->right);
+}
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        for(int i=0;i<=n-1;i++)cin>>s[i];
+        node *ans=NULL;
+        ans=create_tree(ans,0,n);
+        cout<<calc(ans)<<endl;
+        delete(ans);
+        
+    }
+    
+    return 0;
+}
