@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+int test, n, parent_node, child_node,val;
+long long sum;
+char x;
+struct node
+{
+    int data;
+    node *left, *right;
+};
+
+node *create_node(int data)
+{
+    node *temp = new node;
+    temp->data = data;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+void build_tree(node*&temp,int data)
+{
+    if(temp==NULL)
+    {
+        temp=create_node(data);
+        return;
+    }
+    if(temp->data > data)build_tree(temp->left,data);
+    else build_tree(temp->right,data);
+}
+void print_Posorder(node*temp)
+{
+    if(temp->left!=NULL)
+    print_Posorder(temp->left);
+    if(temp->right!=NULL)
+    print_Posorder(temp->right);
+    cout<<temp->data<<" ";
+}
+int main()
+{
+    cin >> test;
+    while (test--)
+    {
+        cin >> n;
+        node *temp=NULL;
+        for(int i=1;i<=n;i++)
+        {
+            cin>>val;
+            build_tree(temp,val);
+        }
+        print_Posorder(temp);
+        cout<<endl;
+    }
+
+    return 0;
+}
