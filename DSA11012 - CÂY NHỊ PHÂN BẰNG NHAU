@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+int test,parent_node,child_node,n;
+char x;
+struct node
+{
+    int data;
+    node *left, *right;
+};
+node *create_node(int data)
+{
+    node *temp=new node;
+    temp->data = data;
+    temp->left=temp->right=NULL;
+    return temp;
+}
+void build_tree(node *temp,char x, int parent_node,int child_node)
+{
+    if(temp!=NULL)
+    {
+        if(temp->data==parent_node)
+        {
+            if(x=='L')temp->left=create_node(child_node);
+            else temp->right=create_node(child_node);
+        }
+        else 
+        {
+            build_tree(temp->left,x,parent_node,child_node);
+            build_tree(temp->right,x,parent_node,child_node);
+        }
+    }
+}
+bool check(node *temp,node *temp2)
+{
+    if(temp==NULL && temp2==NULL)return 1;
+    if(temp->data!=temp2->data)return 0;
+    return check(temp->left,temp2->left)&&check(temp->right,temp2->right);
+}
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        cin>>parent_node>>child_node>>x;
+        node *temp=create_node(parent_node);
+        build_tree(temp,x,parent_node,child_node);
+        for(int i=2;i<=n;i++)
+        {
+            cin>>parent_node>>child_node>>x;
+            build_tree(temp,x,parent_node,child_node);
+        }
+        cin>>n;
+        cin>>parent_node>>child_node>>x;
+        node *temp2=create_node(parent_node);
+        build_tree(temp2,x,parent_node,child_node);
+        for(int i=2;i<=n;i++)
+        {
+            cin>>parent_node>>child_node>>x;
+            build_tree(temp2,x,parent_node,child_node);
+        }
+        cout<<check(temp,temp2)<<endl;
+
+    }
+    return 0;
+}
