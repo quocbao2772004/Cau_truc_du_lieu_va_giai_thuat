@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+using namespace std;
+int test, n, parent_node, child_node;
+long long sum;
+char x;
+struct node
+{
+    int data;
+    node *left, *right;
+};
+
+node *create_node(int data)
+{
+    node *temp = new node;
+    temp->data = data;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+void build_tree(node *root, char x, int parent_node, int child_node)
+{
+    if (root != NULL)
+    {
+        if (root->data == parent_node)
+        {
+            if (x == 'L')
+                root->left = create_node(child_node);
+            else
+                root->right = create_node(child_node);
+        }
+        else
+        {
+            build_tree(root->left, x, parent_node, child_node);
+            build_tree(root->right, x, parent_node, child_node);
+        }
+    }
+}
+
+void InorderTraversal(node*temp,vector<int>&values)
+{
+    if(temp==NULL)return;
+    InorderTraversal(temp->left,values);
+    values.push_back(temp->data);
+    InorderTraversal(temp->right,values);
+}
+
+node* build_binary_search_tree(vector<int>&values,int l,int r)
+{
+    if(l>r)return NULL ;
+    int m=(l+r)/2;
+    node *temp=create_node(values[m]);
+    temp->left=build_binary_search_tree(values,l,m-1);
+    temp->right=build_binary_search_tree(values,m+1,r);
+    return temp;
+
+}
+node* transform_to_binary_search_tree(node* temp)
+{
+    vector<int>values;
+    InorderTraversal(temp,values);
+    sort(values.begin(),values.end());
+    return build_binary_search_tree(values,0,values.size()-1);
+}
+void print_Inorder(node *temp)
+{
+    if(temp==NULL)
+    {
+        return;
+    }
+    print_Inorder(temp->left);
+    cout<<temp->data<<" ";
+    print_Inorder(temp->right);
+}
+int main()
+{
+    cin >> test;
+    while (test--)
+    {
+        cin >> n;
+        cin >> parent_node >> child_node>> x;
+        node *temp=create_node(parent_node);
+        build_tree(temp, x, parent_node, child_node);
+        for(int i=2;i<=n;i++)
+        {
+            cin>>parent_node>>child_node>>x;
+            build_tree(temp,x,parent_node,child_node);
+        }
+        node *ans=transform_to_binary_search_tree(temp);
+        print_Inorder(ans);
+        cout<<endl;
+    }
+
+    return 0;
+}
