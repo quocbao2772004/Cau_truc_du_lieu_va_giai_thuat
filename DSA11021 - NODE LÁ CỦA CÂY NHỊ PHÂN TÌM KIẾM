@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+int test;
+struct node
+{
+    int data;
+    node *left, *right;
+};
+node *create_node(int data)
+{
+    node *temp=new node;
+    temp->data=data;
+    temp->left=temp->right=NULL;
+    return temp;
+}
+void build_binary_search_tree(node *&temp, int data)
+{
+    if(temp==NULL)
+    {
+        temp=create_node(data);
+    }
+    else if(temp->data > data)
+    {
+        build_binary_search_tree(temp->left, data);
+    }
+    else 
+    {
+        build_binary_search_tree(temp->right, data);
+    }
+}
+bool is_leaf(node *temp)
+{
+    if(temp->left==NULL and temp->right==NULL)return true;
+    return false;
+}
+void print_leaf(node *temp)
+{
+    if(temp!=NULL)
+    {
+        if(is_leaf(temp))
+        {
+            cout<<temp->data<<" ";
+        }
+        else 
+        {
+            if(temp->left!=NULL)
+            print_leaf(temp->left);
+            if(temp->right!=NULL)
+            {
+                print_leaf(temp->right);
+            }
+        }
+       
+    }
+}
+int n,val;
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        node *temp=NULL;
+        for(int i=1;i<=n;i++)
+        {
+            cin>>val;
+            build_binary_search_tree(temp,val);
+        }
+        print_leaf(temp);
+        cout<<endl;
+
+    }
+    return 0;
+}
