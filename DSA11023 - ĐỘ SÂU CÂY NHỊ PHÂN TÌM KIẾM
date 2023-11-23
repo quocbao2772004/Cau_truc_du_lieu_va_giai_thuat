@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+int test;
+int ans;
+struct node
+{
+    int data;
+    node *left, *right;
+};
+node *create_node(int data)
+{
+    node *temp=new node;
+    temp->data=data;
+    temp->left=temp->right=NULL;
+    return temp;
+}
+void build_binary_search_tree(node *&temp, int data)
+{
+    if(temp==NULL)
+    {
+        temp=create_node(data);
+    }
+    else if(temp->data > data)
+    {
+        build_binary_search_tree(temp->left, data);
+    }
+    else 
+    {
+        build_binary_search_tree(temp->right, data);
+    }
+}
+bool is_leaf(node *temp)
+{
+    if(temp->left==NULL and temp->right==NULL)return true;
+    return false;
+}
+void find_depth(node *temp,int lv=0)
+{
+    if(temp!=NULL)
+    {
+        if(is_leaf(temp))
+        ans=max(ans,lv);
+        else 
+        {
+            if(temp->left!=NULL)
+            {
+                find_depth(temp->left,lv+1);
+            }
+            if(temp->right!=NULL)
+            {
+                find_depth(temp->right,lv+1);
+            }
+        }
+    }
+}
+int n,val;
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        node *temp=NULL;
+        for(int i=1;i<=n;i++)
+        {
+            cin>>val;
+            build_binary_search_tree(temp,val);
+        }
+        ans=0;
+        find_depth(temp);
+        cout<<ans<<endl;
+
+    }
+    return 0;
+}
