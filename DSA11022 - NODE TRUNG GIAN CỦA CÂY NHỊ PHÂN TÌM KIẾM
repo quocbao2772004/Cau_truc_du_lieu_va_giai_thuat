@@ -1,0 +1,82 @@
+#include<bits/stdc++.h>
+using namespace std;
+int test;
+vector<int>a;
+int n;
+int ans;
+struct node
+{
+    int data;
+    node *left,*right;
+};
+node *create_node(int data)
+{
+    node *temp=new node;
+    temp->data=data;
+    temp->left=temp->right=NULL;
+    return temp;
+}
+void build_binary_search_tree(node *&temp,int data)
+{
+    if(temp==NULL)
+    {
+        temp=create_node(data);
+    }
+    else 
+    {
+        if(temp->data >data) build_binary_search_tree(temp->left,data);
+        else build_binary_search_tree(temp->right,data);
+    }
+}
+void Inorder(node *temp)
+{
+    if(temp->left!=NULL)
+    Inorder(temp->left);
+    cout<<temp->data<<" ";
+    if(temp->right!=NULL)
+    Inorder(temp->right);
+}
+bool is_leaf(node *temp)
+{
+    if(temp!=NULL && temp->left==NULL && temp->right==NULL)return true;
+    return false;
+}
+void count(node *temp)
+{
+    if(temp!=NULL)
+    {
+        if(is_leaf(temp))
+        {
+            return;
+        }
+        else
+        {
+            ans++;
+            if(temp->left!=NULL)count(temp->left);
+            if(temp->right!=NULL)count(temp->right);
+        }
+    }
+}
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        ans=0;
+        cin>>n;
+        node *temp=NULL;
+        for(int i=0; i<n; i++)
+        {
+            int x;
+            cin>>x;;
+            build_binary_search_tree(temp,x);
+        }
+        
+        count(temp);
+        cout<<ans;
+        cout<<endl;
+        delete(temp);
+        a.clear();
+    }
+    return 0;
+}
