@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+int test;
+int n,m,u,v,s,t;
+vector<int>g[10001];
+bool visited[10001];
+int parent[10001];
+void bfs()
+{
+    queue<int>q;
+    q.push(s);
+    visited[s] = true;
+    parent[s]=s;
+    while(!q.empty())
+    {
+        int v=q.front();
+        q.pop();
+        if(v==t)break;
+        for(auto i:g[v])
+        {
+            if(!visited[i])
+            {
+                parent[i]=v;
+                visited[i] = true;
+                q.push(i);
+            }
+        }
+    }
+    stack<int>st;
+    int i=t;
+    while(parent[i]!=i)
+    {
+        st.push(i);
+        i=parent[i];
+    }
+    st.push(i);
+    while(!st.empty())
+    {
+        cout<<st.top()<<" ";
+        st.pop();
+    }
+    cout<<endl;
+    
+}
+int main()
+{
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>m>>s>>t;
+        for(int i=1;i<=n;i++)
+        {
+            visited[i]=0;
+            g[i].clear();
+        }
+        for(int i=1;i<=m;i++)
+        {
+            cin>>u>>v;
+            g[u].push_back(v);
+            g[v].push_back(u);
+        }
+        bfs();
+        
+    }
+    return 0;
+}
