@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,m,u,v;
+vector<int>g[10001];
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>m;
+        bool ok=1;
+        for(int i=1;i<=n;i++)
+        {
+            g[i].clear();
+        }
+        for(int i=1;i<=m;i++)
+        {
+            cin>>u>>v;
+            g[u].push_back(v);
+            g[v].push_back(u);
+        }
+        for(int i=1;i<=n;i++)
+        {
+            for(auto v:g[i])
+            {
+                if(g[i].size()!=g[v].size())
+                {
+                    ok=0;
+                    break;
+                }
+            }
+        }
+        if(ok)cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
+    return 0;
+}
