@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,m,u,v,cnt;
+vector<int>g[10001];
+bool visited[10001];
+int dv[10001],dr[10001];
+
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        int ans=1;
+        memset(dv,0,sizeof(dv));
+        memset(dr,0,sizeof(dr));
+        cin>>n>>m;
+        for(int i=1;i<=m;i++)
+        {
+            cin>>u>>v;
+            dv[u]++;
+            dr[v]++;
+        }
+        for(int i=1;i<=n;i++)
+            if(dr[i]!=dv[i])
+            {
+                ans=0;break;
+            }
+        cout<<ans<<endl;
+    }
+}
