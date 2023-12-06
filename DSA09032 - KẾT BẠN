@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,m,u,v,cnt;
+int friends[100001],size[100001];
+void make_set()
+{
+    for(int i=1;i<=n;i++)
+    {
+        friends[i]=i;
+        size[i]=1;
+    }
+}
+int find(int v)
+{
+    if(friends[v]==v)return v;
+    return v=find(friends[v]);
+}
+bool Union(int u,int v)
+{
+    int a=find(u);
+    int b=find(v);
+    if(a==b)return 0;
+    if(size[a]<size[b])
+    {
+        swap(a,b);
+    }
+    friends[b]=a;
+    size[a]+=size[b];
+    return 1;
+}
+
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>m;
+        make_set();
+        for(int i=1;i<=m;i++)
+        {
+            cin>>u>>v;
+            Union(u,v);
+        }
+        cout<<*max_element(size+1,size+n+1)<<endl;
+
+    }
+    return 0;
+}
