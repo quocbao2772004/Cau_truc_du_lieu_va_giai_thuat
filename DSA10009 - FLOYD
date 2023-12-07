@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+const int hs=1e9;
+int test;
+int n,m,u,v,w,s;
+int main()
+{
+    faster();
+    //file();
+
+       cin>>n>>m;
+       int d[n+5][m+5];
+       for(int i=1;i<=n;i++)
+       {
+           for(int j=1;j<=m;j++)
+           {
+               d[i][j]=1e9;
+           }
+           d[i][i]=0;
+       }
+       for(int i=1;i<=m;i++)
+       {
+           cin>>u>>v>>w;
+           d[u][v]=d[v][u]=w;
+       }
+       for(int k=1;k<=n;k++)
+       {
+           for(int i=1;i<=n;i++)
+           {
+               for(int j=1;j<=n;j++)
+               {
+                   d[i][j]=min(d[i][j],d[k][i]+d[k][j]);
+               }
+           }
+       }
+       cin>>test;
+       while(test--)
+       {
+           cin>>u>>v;
+           cout<<d[u][v]<<endl;
+       }
+
+    return 0;
+}
