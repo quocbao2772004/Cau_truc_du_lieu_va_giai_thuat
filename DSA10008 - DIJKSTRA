@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+const int hs=1e9;
+int test;
+int n,m,u,v,w,s;
+vector<pair<int,int>>g[10001];
+int d[10001];
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+       cin>>n>>m>>s;
+       for(int i=1;i<=n;i++)
+       {
+           g[i].clear();
+           d[i]=hs;
+       }
+       for(int i=1;i<=m;i++)
+       {
+           cin>>u>>v>>w;
+           g[u].push_back({v,w});
+           g[v].push_back({u,w});
+       }
+       d[s]=0;
+       priority_queue< pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>> >q;
+       q.push({0,s});
+       while(!q.empty())
+       {
+           auto top=q.top();
+           q.pop();
+           int distance=top.first;
+           int t=top.second;
+           if(distance>d[t])
+            continue;
+           for(auto it: g[t])
+           {
+               int v=it.first;
+               int w=it.second;
+               if(d[v]>d[t]+w)
+               {
+                   d[v]=d[t]+w;
+                   q.push({d[v],v});
+               }
+           }
+       }
+       for(int i=1;i<=n;i++)
+       {
+           cout<<d[i]<<" ";
+       }
+       cout<<endl;
+    }
+    return 0;
+}
