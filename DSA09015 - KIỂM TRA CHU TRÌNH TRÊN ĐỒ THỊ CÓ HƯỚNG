@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test,n;
+int m,u,v;
+vector<int>g[100001];
+bool ok=0;
+int visited[100001];
+void dfs(int s)
+{
+    if(ok)return;
+    visited[s]=1;
+    for(auto v:g[s])
+    {
+        if(!visited[v])
+        {
+            dfs(v);
+        }
+        else if(visited[v]==1)
+        {
+            ok=1;
+            return;
+        }
+    }
+    visited[s]=2;
+}
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        ok=0;
+        memset(visited,0,sizeof(visited));
+        cin>>n>>m;
+        for(int i=1; i<=n; i++)
+        {
+            g[i].clear();
+        }
+        for(int i=1;i<=m;i++)
+        {
+            cin>>u>>v;
+            g[u].push_back(v);
+        }
+        for(int i=1;i<=n;i++)
+        {
+            if(ok)break;
+            if(!visited[i])
+            {
+                dfs(i);
+            }
+        }
+        if(ok)cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
+
+    return 0;
+}
