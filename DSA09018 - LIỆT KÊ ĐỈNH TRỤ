@@ -1,0 +1,113 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,m,u,v;
+vector<int>g[10001];
+bool visited[10001];
+void dfs(int s,vector<int>g[])
+{
+    visited[s]=1;
+    for(auto i:g[s])
+    {
+        if(!visited[i])
+        {
+            dfs(i,g);
+        }
+    }
+}
+
+void thu(int s,int cnt)
+{
+    int cnt1=0;
+    vector<int>tmp[10001];
+    memset(visited,0,sizeof(visited));
+    for(int i=1;i<=n;i++)
+    {
+        if(i!=s)
+        {
+            for(auto v:g[i])
+            {
+                if(v!=s)
+                {
+                    tmp[v].push_back(i);
+                   // tmp[i].push_back(v);
+                }
+            }
+        }
+    }
+    // cout<<tmp[s].size()<<endl;
+    // for(int i=1;i<=n;i++)
+    // {
+    //     for(auto v:tmp[i])
+    //     {
+    //         cout<<v<<" ";
+    //     }
+    //     cout<<endl;
+    // }
+     visited[s]=1;
+    for(int i=1;i<=n;i++)
+    {
+        if(!visited[i])
+        {
+            cnt1++;
+            dfs(i,tmp);
+
+        }
+    }
+    if(cnt1>cnt)
+    {
+        cout<<s<<" ";
+    }
+}
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        int cnt=0;
+        cin>>n>>m;
+        for(int i=1;i<=n;i++)
+        {
+            visited[i]=0;
+            g[i].clear();
+        }
+        for(int i=1;i<=m;i++)
+        {
+            cin>>u>>v;
+            g[u].push_back(v);
+            g[v].push_back(u);
+        }
+       for(int i=1;i<=n;i++)
+        {
+            if(!visited[i])
+            {
+                cnt++;
+                dfs(i,g);
+            }
+
+        }
+
+        for(int i=1;i<=n;i++)
+        {
+            thu(i,cnt);
+
+        }
+        cout<<endl;
+    }
+
+
+    return 0;
+}
