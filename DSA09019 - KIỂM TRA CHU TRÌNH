@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,m,u,v;
+vector<int>g[10001];
+bool visited[10001];
+bool ok=0;
+void dfs(int s,int par)
+{
+    if(ok)return;
+    visited[s]=1;
+    for(auto v:g[s])
+    {
+        if(!visited[v])
+        {
+            dfs(v,s);
+        }
+        else if(visited[v] && v!=par)
+        {
+
+            ok=1;
+            return;
+        }
+    }
+}
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>m;
+        for(int i=1;i<=n;i++)
+        {
+            visited[i]=0;
+            g[i].clear();
+        }
+        for(int i=1;i<=m;i++)
+        {
+            cin>>u>>v;
+            g[u].push_back(v);
+            g[v].push_back(u);
+        }
+        ok=0;
+        for(int i=1;i<=n;i++)
+        {
+            if(ok)break;
+            if(!visited[i])
+            {
+                dfs(i,1);
+            }
+        }
+        if(ok)cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
+
+
+    return 0;
+}
