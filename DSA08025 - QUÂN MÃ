@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+char x,n1,y,n2;
+pair<int,int>start,endd;
+int dx[8]={-1,-2,-2,-1,1,2,2,1};
+int dy[8]={-2,-1,1,2,-2,-1,1,2};
+
+int visited[101][101];
+int bfs(pair<int,int>start, pair<int,int>endd)
+{
+    queue<pair<int,int>>q;
+    q.push(start);
+    visited[start.first][start.second]=1;
+    while(!q.empty())
+    {
+        pair<int,int>v=q.front();
+        q.pop();
+        for(int i=0;i<8;i++)
+        {
+            int x=v.first+dx[i];
+            int y=v.second+dy[i];
+            if(pair<int,int>{x,y}==endd)
+                {
+                    return visited[v.first][v.second];
+                }
+            if(!visited[x][y] && x>=1&&x<=8 && y>=1&&y<=8)
+            {
+                visited[x][y]=visited[v.first][v.second]+1;
+                q.push({x,y});
+            }
+        }
+    }
+    return -1;
+}
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        memset(visited,0,sizeof(visited));
+        cin>>x>>n1>>y>>n2;
+        start={x-'a'+1,n1-'0'};
+        endd={y-'a'+1,n2-'0'};
+       // cout<<x<<" "<<n1<<" "<<y<<" "<<n2<<endl;
+       if(start==endd)
+       {
+           cout<<0<<endl;
+       }
+       else cout<<bfs(start,endd)<<endl;
+    }
+    return 0;
+}
+
