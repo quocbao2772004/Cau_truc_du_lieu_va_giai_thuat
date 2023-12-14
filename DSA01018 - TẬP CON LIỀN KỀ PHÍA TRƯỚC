@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int k,n;
+int a[10001];
+void solve()
+{
+    int j=k;
+    while(a[j-1]+1 == a[j] && j>=1)j--;
+    if(j>0)
+    {
+        a[j]--;
+        for(int i=k;i>j;i--)a[i]=n-k+i;
+        for(int i=1;i<=k;i++)cout<<a[i]<<" ";
+        cout<<endl;
+    }
+    else
+    {
+        for(int i=n-k+1;i<=n;i++)cout<<i<<" ";
+        cout<<endl;
+    }
+
+}
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        cin>>n>>k;
+        for(int i=1;i<=k;i++)cin>>a[i];
+        solve();
+    }
+    return 0;
+}
+
