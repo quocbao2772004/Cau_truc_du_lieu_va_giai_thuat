@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+string s;
+int n;
+char q;
+int l,r;
+bool check_dx(int l,int r)
+{
+    int i=l,j=r;
+    while(i<=j)
+    {
+        if(s[i]!=s[j])return 0;
+        i++;
+        j--;
+    }
+    return 1;
+}
+int main()
+{
+    faster();
+    //file();
+    cin>>s;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {
+        cin>>q>>l>>r;
+        if(q=='q')
+        {
+            if(check_dx(l-1,r-1))cout<<"YES"<<endl;
+            else cout<<"NO"<<endl;
+        }
+        else s[l-1]=r+'0';
+    }
+    //cout<<s<<endl;
+
+	return 0;
+}
