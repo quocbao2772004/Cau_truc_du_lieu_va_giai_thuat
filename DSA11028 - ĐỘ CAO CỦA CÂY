@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,m;
+int u,v;
+vector<int>g[100001];
+bool visited[100001];
+void bfs(int s)
+{
+    queue<pair<int,int>>q;
+    q.push({s,0});
+    visited[s]=1;
+    int m=0;
+    while(!q.empty())
+    {
+        auto v=q.front();
+        q.pop();
+        m=max(m,v.second);
+        for(auto i:g[v.first])
+        {
+            if(!visited[i])
+            {
+                visited[i]=1;
+                q.push({i,v.second+1});
+            }
+        }
+    }
+    cout<<m<<endl;
+}
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        memset(visited,0,sizeof(visited));
+        cin>>n;
+        for(int i=1;i<=n;i++)g[i].clear();
+        for(int i=1;i<=n-1;i++)
+        {
+            cin>>u>>v;
+            g[u].push_back(v);
+            g[v].push_back(u);
+        }
+        bfs(1);
+
+
+
+
+
+    }
+	return 0;
+}
