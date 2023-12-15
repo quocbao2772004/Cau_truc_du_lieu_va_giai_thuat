@@ -1,0 +1,85 @@
+#include<bits/stdc++.h>
+using namespace std;
+void file()
+{
+    freopen("thu.inp","r",stdin);
+    freopen("thu.out","w",stdout);
+}
+void faster()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+int test;
+int n,m;
+int u,v;
+vector<int>g[100001];
+bool visited[100001];
+int parent[100001];
+void bfs(int s)
+{
+    queue<int>q;
+    q.push(s);
+    parent[s]=s;
+    while(!q.empty())
+    {
+        int v=q.front();
+        q.pop();
+        for(auto i:g[v])
+        {
+            if(!visited[i])
+            {
+                visited[i]=1;
+                parent[i]=v;
+                q.push(i);
+            }
+        }
+    }
+}
+void find_path(int i)
+{
+    stack<int>st;
+    while(parent[i]!=i)
+    {
+        st.push(i);
+        i=parent[i];
+    }
+    st.push(i);
+    while(!st.empty())
+    {
+        cout<<st.top()<<" ";
+        st.pop();
+    }
+
+    cout<<endl;
+
+
+}
+int main()
+{
+    faster();
+    //file();
+    cin>>test;
+    while(test--)
+    {
+        memset(visited,0,sizeof(visited));
+        cin>>n;
+        for(int i=1;i<=n;i++)g[i].clear();
+        for(int i=1;i<=n-1;i++)
+        {
+            cin>>u>>v;
+            g[u].push_back(v);
+        }
+        bfs(1);
+        for(int i=1;i<=n;i++)
+        {
+            if(g[i].size()==0)
+            {
+                find_path(i);
+            }
+        }
+
+    }
+	return 0;
+}
