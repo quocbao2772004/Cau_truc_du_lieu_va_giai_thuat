@@ -1,0 +1,32 @@
+def main():
+    test=int(input())
+    while test>0:
+        n,m=map(int,input().split())
+        a=list(map(int,input().split()))
+        b=list(map(int,input().split()))
+        a.sort()
+        b.sort()
+        union=[]
+        intersection=[]
+        dd1=[0]*100009
+        for i in a:
+            dd1[i]=1
+            union.append(i)
+        for i in b:
+            if dd1[i]==1:
+                dd1[i]=2
+                intersection.append(i)
+            elif dd1[i]==0:
+                dd1[i]=1
+                union.append(i)
+        union.sort()
+        intersection.sort()
+        for i in union:
+            print(i,end=" ")
+        print()
+        for i in intersection:
+            print(i,end=" ")
+        print()
+        test-=1
+if __name__=="__main__":
+    main()
