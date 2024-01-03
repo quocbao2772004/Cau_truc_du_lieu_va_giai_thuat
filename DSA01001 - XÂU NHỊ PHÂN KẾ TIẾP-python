@@ -1,0 +1,14 @@
+test=int(input())
+for v in range(0,test) :
+    s=input()
+    n=len(s)-1
+    ans=""
+    while n>=0 and s[n]=='1':
+        ans='0'+ans
+        n-=1
+    if n>=0 :
+        ans='1'+ans  
+        n-=1
+    for i in range(n,-1,-1):
+        ans=s[i]+ans      
+    print(ans)
